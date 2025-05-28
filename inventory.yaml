@@ -1,7 +1,8 @@
 plugin: netbox.netbox.nb_inventory
-token: "{{ netbox_token }}"
-api_endpoint: "{{ netbox_url }}"
+token: "ee951e8cc6fcadc041c9578d015e13175509d014" # Replace with your actual API token
+api_endpoint: "https://netbox.te-labs.1keyes.net/" # Replace with your NetBox URL
 validate_certs: false
 config_context: false
 group_by:
   - device_roles
+
