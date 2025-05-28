@@ -1,0 +1,7 @@
+plugin: netbox.netbox.nb_inventory
+token: "{{ netbox_token }}"
+api_endpoint: "{{ netbox_url }}"
+validate_certs: false
+config_context: false
+group_by:
+  - device_roles
