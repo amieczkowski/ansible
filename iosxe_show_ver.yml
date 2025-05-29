@@ -12,8 +12,8 @@
     ansible_become: yes
     ansible_become_method: enable
     # Use lookup('env', ...) to fetch credentials injected by AAP
-    ansible_user: "te-engg-lab-tf.gen"
-    ansible_password: "{{ lookup('cyberark.conjur.conjur_variable', 'te/engg-lab/Cisco AD/te-engg-lab-tf.gen', validate_certs=False) }}"
+    ansible_user: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
+    ansible_password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
 
   tasks:
     - name: Run 'show version' command
