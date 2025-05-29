@@ -1,0 +1,28 @@
+---
+# This playbook connects to IOS XE routers and executes the 'show version' command,
+# using credentials managed by Ansible Automation Platform (AAP).
+
+- name: Execute show version on IOS XE routers
+  hosts: tags_routers
+  gather_facts: no
+
+  vars:
+    ansible_network_os: ios
+    ansible_connection: network_cli
+    ansible_become: yes
+    ansible_become_method: enable
+    # Use lookup('env', ...) to fetch credentials injected by AAP
+    ansible_user: "{{ lookup('env', 'ANSIBLE_NET_USERNAME') }}"
+    ansible_password: "{{ lookup('env', 'ANSIBLE_NET_PASSWORD') }}"
+    ansible_become_pass: "{{ lookup('env', 'ANSIBLE_NET_AUTH_PASS') | default(omit) }}" # Optional enable password
+
+  tasks:
+    - name: Run 'show version' command
+      cisco.ios.ios_command:
+        commands:
+          - show version
+      register: show_version_output
+
+    - name: Print the output of 'show version'
+      debug:
+        var: show_version_output.stdout_lines
