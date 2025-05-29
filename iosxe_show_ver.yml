@@ -3,7 +3,7 @@
 # using credentials managed by Ansible Automation Platform (AAP).
 
 - name: Execute show version on IOS XE routers
-  hosts: tags_routers
+  hosts: tags_router
   gather_facts: no
 
   vars:
